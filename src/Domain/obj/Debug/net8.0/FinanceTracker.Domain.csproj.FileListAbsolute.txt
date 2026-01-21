@@ -1,0 +1,11 @@
+/workspace/src/Domain/bin/Debug/net8.0/FinanceTracker.Domain.deps.json
+/workspace/src/Domain/bin/Debug/net8.0/FinanceTracker.Domain.dll
+/workspace/src/Domain/bin/Debug/net8.0/FinanceTracker.Domain.pdb
+/workspace/src/Domain/obj/Debug/net8.0/FinanceTracker.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/workspace/src/Domain/obj/Debug/net8.0/FinanceTracker.Domain.AssemblyInfoInputs.cache
+/workspace/src/Domain/obj/Debug/net8.0/FinanceTracker.Domain.AssemblyInfo.cs
+/workspace/src/Domain/obj/Debug/net8.0/FinanceTracker.Domain.csproj.CoreCompileInputs.cache
+/workspace/src/Domain/obj/Debug/net8.0/FinanceTracker.Domain.dll
+/workspace/src/Domain/obj/Debug/net8.0/refint/FinanceTracker.Domain.dll
+/workspace/src/Domain/obj/Debug/net8.0/FinanceTracker.Domain.pdb
+/workspace/src/Domain/obj/Debug/net8.0/ref/FinanceTracker.Domain.dll

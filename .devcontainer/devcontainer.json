@@ -1,0 +1,28 @@
+{
+    "name": "ExpenseTracker",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+
+    //Installation for node and .NET
+    "features": {
+      "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+      "ghcr.io/devcontainers/features/dotnet:2": { "version": "8.0" }
+    },
+
+    //Ports we are forwarding for localhost
+    "forwardPorts": [3000, 5000, 5432],
+
+    //Command to run after build is complete
+    "postCreateCommand": "cd frontend && npm install && cd ../src/api && dotnet restore",
+
+    //Customizations for vscode
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-dotnettools.csharp",
+          "dbaeumer.vscode-eslint"
+        ]
+      }
+    }
+}
