@@ -14,11 +14,10 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(
-
-configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IExpenseRepository, ExpenseRepository>();
+        services.AddScoped<IIncomeSettingsRepository, IncomeSettingsRepository>();
 
         return services;
     }

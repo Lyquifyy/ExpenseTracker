@@ -1,0 +1,78 @@
+:root {
+  /* Neon color palette */
+  --neon-pink: #ff00ff;
+  --neon-cyan: #00ffff;
+  --neon-purple: #9d00ff;
+  --neon-green: #00ff41;
+  --neon-orange: #ff6600;
+  --neon-yellow: #ffff00;
+
+  /* Background colors */
+  --bg-dark: #0a0a0f;
+  --bg-card: #12121a;
+  --bg-input: #1a1a25;
+  --bg-hover: #22222f;
+
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0c0;
+  --text-muted: #606070;
+
+  /* Glow effects */
+  --glow-pink: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+  --glow-cyan: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  --glow-purple: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
+  --glow-green: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green);
+
+  /* Typography */
+  --font-display: 'Press Start 2P', monospace;
+  --font-body: 'VT323', 'Courier New', monospace;
+
+  /* Spacing */
+  --border-width: 2px;
+  --border-radius: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.4;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-purple);
+  border: 1px solid var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-pink);
+}
+
+/* Selection */
+::selection {
+  background: var(--neon-pink);
+  color: var(--bg-dark);
+}

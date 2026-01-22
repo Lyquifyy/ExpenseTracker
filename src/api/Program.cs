@@ -1,5 +1,8 @@
 using FinanceTracker.Application;
 using FinanceTracker.Infrastructure;
+using FinanceTracker.Infrastructure.Data;
+using FinanceTracker.WebApi.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +26,17 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// Apply pending migrations on startup (development only)
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
+// Global error handling
+app.UseExceptionHandling();
 
 if (app.Environment.IsDevelopment())
 {

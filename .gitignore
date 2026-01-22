@@ -1,0 +1,72 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.suo
+*.rsuser
+
+# Rider files
+.idea/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# User-specific files
+*.env
+*.env.local
+*.env.*.local
+appsettings.local.json
+
+# Secrets
+secrets.json
+
+# Entity Framework Migrations - keep migrations, ignore snapshots in some cases
+# *.Designer.cs can be kept as they are generated
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+[Cc]overage/
+*.coverage
+*.coveragexml
+
+# Frontend (covered by frontend/.gitignore but adding for safety)
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# JetBrains Rider
+*.sln.iml

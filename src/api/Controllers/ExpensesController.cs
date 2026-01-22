@@ -1,5 +1,6 @@
+using FinanceTracker.Application.DTOs;
 using FinanceTracker.Application.Services;
-using FinanceTracker.Domain.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceTracker.WebApi.Controllers;
@@ -9,30 +10,28 @@ namespace FinanceTracker.WebApi.Controllers;
 public class ExpensesController : ControllerBase
 {
     private readonly ExpenseService _expenseService;
+    private readonly IValidator<CreateExpenseDto> _createValidator;
+    private readonly IValidator<UpdateExpenseDto> _updateValidator;
 
-    public ExpensesController(ExpenseService expenseService)
+    public ExpensesController(
+        ExpenseService expenseService,
+        IValidator<CreateExpenseDto> createValidator,
+        IValidator<UpdateExpenseDto> updateValidator)
     {
         _expenseService = expenseService;
+        _createValidator = createValidator;
+        _updateValidator = updateValidator;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAll()
     {
         var expenses = await _expenseService.GetAllExpensesAsync();
         return Ok(expenses);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(Expense expense)
-    {
-        var created = await
-_expenseService.CreateExpenseAsync(expense);
-        return CreatedAtAction(nameof(GetAll), new { id = created.Id
-}, created);
-    }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<ExpenseDto>> GetById(Guid id)
     {
         var expense = await _expenseService.GetExpenseByIdAsync(id);
         if (expense == null)
@@ -40,20 +39,38 @@ _expenseService.CreateExpenseAsync(expense);
         return Ok(expense);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, Expense expense)
+    [HttpPost]
+    public async Task<ActionResult<ExpenseDto>> Create(CreateExpenseDto dto)
     {
-        if (id != expense.Id)
-            return BadRequest();
+        var validationResult = await _createValidator.ValidateAsync(dto);
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
 
-        await _expenseService.UpdateExpenseAsync(expense);
-        return NoContent();
+        var created = await _expenseService.CreateExpenseAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
     }
 
-    [HttpDelete("{id}")]
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<ExpenseDto>> Update(Guid id, UpdateExpenseDto dto)
+    {
+        var validationResult = await _updateValidator.ValidateAsync(dto);
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+
+        var updated = await _expenseService.UpdateExpenseAsync(id, dto);
+        if (updated == null)
+            return NotFound();
+
+        return Ok(updated);
+    }
+
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await _expenseService.DeleteExpenseAsync(id);
+        var deleted = await _expenseService.DeleteExpenseAsync(id);
+        if (!deleted)
+            return NotFound();
+
         return NoContent();
     }
 }
